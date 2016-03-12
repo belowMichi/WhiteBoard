@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/btn.css">
+    <link rel="stylesheet" href="/stylesheets/choose.css">
+    <!--<script src="../public/javascripts/lib/jquery-1.11.2.js"></script>-->
+    <!--<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>-->
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="center">
+    <div class="btn-box">
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block"
+                data-toggle="modal" data-target="#myModal"> CREAT
+        </button>
+
+        <button type="button" class="btn btn-primary btn-lg btn-block"
+                data-toggle="button"> ENTER
+        </button>
+
+        <form role="form" method="post" action="/enter">
+            <button type="submit" name="1" value="group1">asdasd11111</button>
+            <button type="submit" name="2" value="group2">asdasd22222</button>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                     新建房间
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div style="padding: 50px 100px 50px;">
+                    <form class="bs-example bs-example-form" role="form">
+                        <div class="input-group">
+                            <span class="input-group-addon">房间名称</span>
+                            <input type="text" class="form-control" placeholder="please input the room name">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon">房间密码</span>
+                            <input type="text" class="form-control" placeholder="please set the room password">
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary">
+                    提交
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+
+</body>
+</html>

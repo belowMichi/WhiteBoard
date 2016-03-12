@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/chat.css'/>
+    <link rel='stylesheet' href='/stylesheets/main.css'/>
+
+    <style>
+        .choose_block {
+            display: block;
+            cursor: pointer;
+            border: 1px #333 solid;
+            width: 70px;
+            text-align: center;
+            line-height: 50px;
+            /*background-color: red;*/
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="well jumbotron">
+
+
+    <!--<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or-->
+    <!--information.</p>-->
+
+    <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>-->
+</div>
+<div class="m-body">
+    <div style="margin-left:30px;">
+        <canvas id="myCanvas" width="600" height="500"
+                style="border: 5px blue solid ;position:absolute;left:100px; z-index:0"></canvas>
+        <canvas id="myCanvas_tmp" width="600" height="500"
+                style="border: 5px blue solid ;position:absolute; left:100px;z-index:1"></canvas>
+        <div class="choose_block" onclick=changeto("pencil");>pencil</div>
+        <div class="choose_block" onclick=changeto("line");>line</div>
+        <div class="choose_block" onclick=changeto("brush");>brush</div>
+        <div class="choose_block" onclick=clearAll();>clear</div>
+        <div class="choose_block" onclick=rewrite();>rewrite</div>
+    </div>
+
+    <div class="m-chat panel panel-default">
+        <div class="chat-head panel-heading">
+            控制台:&nbsp;
+        </div>
+        <div class="panel-body">
+            <div class="chat-box " id="incomingChatMessages">
+            </div>
+
+            <div class="chat-send">
+                <div class="chat-send-nav">
+
+                </div>
+
+                <div class="input-group">
+                    <textarea class="send-box form-control" id="outgoingChatMessage" rows="3"></textarea>
+
+      <span class="input-group-btn">
+        <button class="btn btn-default btnHeight" id="btn-send" type="button">发送</button>
+      </span>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+        <!--<div class="chat-send">-->
+        <!--&lt;!&ndash;<textarea class="send-box" id="outgoingChatMessage"></textarea>&ndash;&gt;-->
+        <!--&lt;!&ndash;<button type="button" class="btn btn-default navbar-btn" id="btn-send" value="发送">发送</button>&ndash;&gt;-->
+        <!--</div>-->
+
+    </div>
+</div>
+
+
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+
+
+<!--socket控制-->
+<script>
+    var afterUrl = '/some';
+    var socket = io.connect('http://192.168.1.103:3000');
+    var group = "<%=roomid%>";
+    console.log(group);
+    socket.emit('joinRoom', group);
+
+
+    socket.on('connect', function () {
+        $('.chat-head').append($('<p>已连接！</p>'));
+
+        socket.on('message', function (message) {
+            $('#incomingChatMessages').append($('<p></p>').text(message));
+        });
+        socket.on('disconnect', function () {
+            $('.chat-head').append('<p>失去连接</p>');
+        });
+    });
+
+
+    $('#outgoingChatMessage').keypress(function (event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            var msg = '<%= user %> : ' + $('#outgoingChatMessage').val();
+            socket.send(msg);
+            $('#incomingChatMessages').append($('<p></p>').text(msg));
+            $('#outgoingChatMessage').val('');
+        }
+    });
+    $('#btn-send').click(function (event) {
+        var msg = '<%= user %> : ' + $('#outgoingChatMessage').val();
+        var data = {
+            roomId: group,
+            msg: msg
+        };
+        socket.send(data);
+        $('#incomingChatMessages').append($('<p></p>').text(msg));
+        $('#outgoingChatMessage').val('');
+
+    });
+
+    //    $('body').click(function(event){
+    //        socket.send(event.clientX);
+    //    });
+
+</script>
+<script src="/javascripts/canvas.js"></script>
+<script>
+    //接受重绘socket指令
+    socket.on('pencilMd', function (msg) {
+        isDrawing = true;
+        ctx.beginPath();
+        ctx_tmp.beginPath();
+//        $('#incomingChatMessages').append($('<li></li>').text(msg));
+
+
+        ctx_tmp.lineCap = ctx.lineCap = msg.lineCap;
+        ctx_tmp.lineJoin = ctx.lineJoin = msg.lineJoin;
+        ctx_tmp.lineWidth = ctx.lineWidth = msg.lineWidth;
+        ctx_tmp.strokeStyle = ctx.strokeStyle = msg.strokeStyle;
+        console.log(msg)
+    });
+
+    socket.on('pencilMm', function (msg) {
+        clearContext(ctx_tmp);
+        PositionArr.push(msg);
+        tempArr.push(msg);
+        ctx_tmp.lineTo(msg.x, msg.y);
+        ctx_tmp.stroke();
+    });
+
+    socket.on('pencilMu', function (msg) {
+        isDrawing = false;
+        PositionArr.push("next");
+        clearContext(ctx_tmp);
+        ctx.beginPath();
+        for (var i in tempArr) {
+            ctx.lineTo(tempArr[i].x, tempArr[i].y);
+
+        }
+        console.log('get socket pencilMu')
+        ctx.stroke();
+        tempArr.length = 0;
+
+    });
+</script>
+
+<div>this is room!!</div>
+<%=roomid%>
+</body>
+
+
+</html>

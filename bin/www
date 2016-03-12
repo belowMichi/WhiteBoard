@@ -1,0 +1,186 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('nodeDemoT:server');
+var http = require('http');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+//**
+var io = require('socket.io')(server);
+
+//
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+//**
+//一个客户端连接的字典，当一个客户端连接到服务器时，
+//会产生一个唯一的socketId，该字典保存socketId到用户信息（昵称等）的映射
+
+var connectionList = {};
+io.of('/some').on('connection', function (socket) {
+  console.log(123);
+  socket.on('test', function (data) {
+    socket.broadcast.emit('event_name',{});
+  });
+});
+io.on('connection', function (socket) {
+  ///
+  //
+    //客户端连接时，保存socketId和用户名
+
+    var socketId = socket.id;
+
+    connectionList[socketId] = {
+      socket: socket
+    };
+    //用户进入聊天室事件，向其他在线用户广播其用户名
+    socket.on('join', function (data) {
+      //console.log(data)
+      socket.broadcast.emit('broadcast_join', data);
+      connectionList[socketId].username = data.username;
+    });
+    //用户离开聊天室事件，向其他在线用户广播其离开
+    socket.on('disconnect', function () {
+      if (connectionList[socketId].username) {
+        socket.broadcast.emit('broadcast_quit', {
+          username: connectionList[socketId].username
+        });
+      }
+      delete connectionList[socketId];
+    });
+    //用户发言事件，向其他在线用户广播其发言内容
+    socket.on('say', function (data) {
+      socket.broadcast.emit('broadcast_say',{
+        username: connectionList[socketId].username,
+        text: data.text
+      });
+    });
+
+  var joinRoom=function(group){
+    socket.join(group);
+    console.log('2已join'+group);
+  };
+
+  socket.on('joinRoom', function (data) {
+    console.log('1已join'+data)
+    joinRoom(data);
+  });
+
+
+
+  socket.emit('news', { hello: 'worldhahahahh skjd f' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+  socket.on('message', function (data) {
+    console.log('接受到 ',data);
+    //将信息发送给其他客户端
+    socket.broadcast.to(data.roomId).emit('message', data.msg);
+    //socket.broadcast.to(data.roomId).emit('message',  data.msg);
+  });
+
+  socket.on('pencilMd', function (msg) {
+    console.log('接受到 ', msg);
+    //将信息发送给其他客户端
+    socket.broadcast.to(msg.roomId).emit('pencilMd', msg);
+
+  });
+  socket.on('pencilMm', function (msg) {
+    console.log('接受到 ', msg);
+    //将信息发送给其他客户端
+    socket.broadcast.to(msg.roomId).emit('pencilMm', msg);
+
+  });
+  socket.on('pencilMu', function (msg) {
+    console.log('接受到 ', msg);
+    //将信息发送给其他客户端
+    socket.broadcast.to(msg.roomId).emit('pencilMu', msg);
+
+  });
+
+});
+
+
+
+//
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+  console.log('Listening on ' + bind);
+}

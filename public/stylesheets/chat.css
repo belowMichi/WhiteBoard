@@ -1,0 +1,46 @@
+.m-body {
+    position: relative;
+}
+
+.m-chat {
+    position: absolute;
+    top: 0;
+    /*right:0;*/
+    left: 800px;
+    /*background-color: #eee;*/
+    height:500px;
+    width: 300px;
+}
+
+.chat-head {
+    height: 60px;
+
+}
+
+.chat-box {
+    height: 330px;
+    background-color: #fff;
+    overflow: auto;
+    margin: 2px;
+
+}
+
+.chat-send {
+    margin-top:5px;
+    height: 20px;
+    background-color: #fff;
+
+}
+
+.send-box{
+
+    /*width: 225px;*/
+    /*max-width: 440px;*/
+    /*height: 90px;*/
+    /*max-height: 90px;*/
+    /*float: left;*/
+}
+
+.btnHeight{
+    height:74px;
+}
