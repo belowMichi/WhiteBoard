@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title><%= title %></title>
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css" media="screen">
     <style type="text/css">
         .m15{ margin: 15px;}
         .tc{ text-align: center;font-size: 18px;font-weight: 600;}
@@ -14,7 +14,7 @@
 </head>
 <body screen_capture_injected="true">
 <div class="container">
-
+    <%- message %>
     <form class="col-sm-offset-4 col-sm-4 form-horizontal" role="form" method="post" onsubmit="return false">
         <fieldset>
             <legend></legend>
@@ -59,8 +59,11 @@
     </form>
 </div>
 
-<script type="text/javascript" src="javascripts/jquery.min.js"></script>
-<script type="text/javascript" src="javascripts/bootstrap.min.js"></script>
+<!--最好使用模块化加载吧？-->
+<!--<script type="text/javascript" src="javascripts/lib/jquery.min.js"></script>-->
+<!--<script type="text/javascript" src="javascripts/lib/bootstrap.min.js"></script>-->
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(function(){
         $("#login1").click(function(){
@@ -86,6 +89,7 @@
                     },
                     error: function(data,err){
                         location.href = 'register';
+                        console.log("err")
                     }
                 });
             }
@@ -93,5 +97,5 @@
     });
 </script>
 </body>
-</head>
+
 </html>

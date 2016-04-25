@@ -99,7 +99,12 @@ io.on('connection', function (socket) {
     socket.broadcast.to(data.roomId).emit('message', data.msg);
     //socket.broadcast.to(data.roomId).emit('message',  data.msg);
   });
+  socket.on('audio', function (msg) {
+    console.log('接受到 ', msg);
+    //将信息发送给其他客户端
+    socket.broadcast.to(msg.roomId).emit('audio', msg);
 
+  });
   socket.on('pencilMd', function (msg) {
     console.log('接受到 ', msg);
     //将信息发送给其他客户端

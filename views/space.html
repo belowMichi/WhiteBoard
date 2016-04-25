@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
+
+    <title>Victoria vCard - Free Bootstrap 3 Theme</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/space.css" rel="stylesheet">
+
+    <!--<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>-->
+    <!--<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+</head>
+
+<body>
+
+
+<div class="container">
+    <div class="col-lg-6 col-lg-offset-3">
+
+        <!-- ===== vCard Navigation ===== -->
+        <div class="row w">
+            <div class="col-md-4">
+                <div class="avatar">
+                <img class="img-responsive" src="img/space/avatar.jpg" alt="">
+                </div>
+                <ul class="nav nav-tabs nav-stacked" id="myTab">
+                    <li class="active"><a href="#about">个人资料</a></li>
+                    <li><a href="#profile">组群信息</a></li>
+                    <li><a href="#portfolio">个人作品</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div><!-- col-md-4 -->
+
+            <!-- ===== vCard Content ===== -->
+            <div class="col-md-8">
+                <div class="tab-content">
+
+                    <!-- ===== First Tab ===== -->
+                    <div class="tab-pane active" id="about">
+                        <h3>Victoria Wallberg</h3>
+                        <h5>Web Designer</h5>
+                        <hr>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <p>Has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.</p>
+                        <p class="pull-right red"><i class="icon-heart"></i></p>
+                    </div><!-- tab about -->
+
+                    <!-- ===== Second Tab ===== -->
+                    <div class="tab-pane" id="profile" ms-controller="friends">
+
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default " id="group-1">
+                                <div class="panel-heading ">
+                                    <div style="width:30%;display: inline-block">
+                                        <a data-toggle="collapse" data-parent="#accordion"
+                                           href="#collapseOne">第一组</a>
+                                    </div>
+
+                                    <div class="dropdown " style="text-align: right;width:65%;display: inline-block">
+
+                                                        <a href="#" id="addFriends" class="dropdown-toggle "
+                                                           data-toggle="dropdown" role="button" aria-haspopup="true"
+                                                              aria-expanded="false">添加好友<span class="caret"></span></a>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+
+                                            <form class="bs-example bs-example-form"
+                                                  role="form">
+                                                <div class="row">
+
+                                                    <div class="col-lg-12">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" placeholder="请输入对方用户名"><span class="input-group-btn"><button class="addFriendsSubmit btn btn-default" type="button">确定</button></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="message"></div>
+                                            </form>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in" style="max-height:300px;overflow:auto;position:relative">
+
+                                    <ul class="list-group" >
+                                        <li class="list-group-item" ms-repeat="frisArr">{{el.name}}</li>
+
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion"
+                                           href="#collapseTwo">
+                                           第 2 部分
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse " style="max-height:300px;overflow:auto;position:relative">
+
+                                        <ul class="list-group" >
+                                            <li class="list-group-item">免费域名注册</li>
+                                            <li class="list-group-item">免费 Window 空间托管</li>
+                                            <li class="list-group-item">图像的数量</li>
+                                            <li class="list-group-item">24*7 支持</li>
+                                            <li class="list-group-item">每年更新成本</li>
+                                        </ul>
+
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion"
+                                           href="#collapseThree">
+                                            第 3 部分
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson
+                                        cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                                        vice lomo.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- Tab Profile -->
+
+                    <!-- ===== Third Tab ===== -->
+                    <div class="tab-pane" id="portfolio">
+                        <div class="row">
+                            <div class="col-xs-6 centered">
+                                <img class="img-responsive" src="img/space/p01.png" alt="">
+                                <a href="#"><h6><i class="icon-link"></i> Project Name</h6></a>
+                            </div><!-- col-xs-6 -->
+                            <div class="col-xs-6 centered">
+                                <img class="img-responsive" src="img/space/p02.png" alt="">
+                                <a href="#"><h6><i class="icon-link"></i> Project Name</h6></a>
+                            </div><!-- col-xs-6 -->
+                        </div><!-- row -->
+
+                        <div class="row">
+                            <br>
+                            <div class="col-xs-6 centered">
+                                <img class="img-responsive" src="img/space/p03.png" alt="">
+                                <a href="#"><h6><i class="icon-link"></i> Project Name</h6></a>
+                            </div><!-- col-xs-6 -->
+                            <div class="col-xs-6 centered">
+                                <img class="img-responsive" src="img/space/p04.png" alt="">
+                                <a href="#"><h6><i class="icon-link"></i> Project Name</h6></a>
+                            </div><!-- col-xs-6 -->
+                        </div><!-- row -->
+                    </div><!-- /Tab Portfolio -->
+
+                    <!-- ===== Fourth Tab ===== -->
+                    <div class="tab-pane" id="contact">
+                        <h4>Contact Information</h4>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <p class="sm">
+                                    <i class="icon-globe"></i> - BlackTie.co <br/>
+                                    <i class="icon-envelope"></i> - victoria@blacktie.co
+                                </p>
+                            </div><!-- col-xs-6 -->
+
+                            <div class="col-xs-6">
+                                <p class="sm">
+                                    <i class="icon-phone"></i> - +44 2009-4839 <br/>
+                                    <i class="icon-apple"></i> - 902 3940-4439
+                                </p>
+                            </div><!-- col-xs-6 -->
+                        </div><!-- row -->
+
+                        <h4>Social Links</h4>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <p class="sm">
+                                    <i class="icon-facebook"></i> - Vicky.Wallberg <br/>
+                                    <i class="icon-tumblr"></i> - Love-Vicky-Site
+                                </p>
+                            </div><!-- col-xs-6 -->
+
+                            <div class="col-xs-6">
+                                <p class="sm">
+                                    <i class="icon-dribbble"></i> - Vicoooria <br/>
+                                    <i class="icon-twitter"></i> - @BlackTie_co
+                                </p>
+                            </div><!-- col-xs-6 -->
+                        </div><!-- row -->
+                    </div><!-- Tab Contact -->
+
+                </div><!-- Tab Content -->
+            </div><!-- col-md-8 -->
+        </div><!-- row w -->
+    </div><!-- col-lg-6 -->
+</div><!-- /.container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/js/lib/jquery-1.11.2.js"></script>
+<script src="/js/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/lib/avalon.js"></script>
+<script>
+
+    $('#myTab a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+    $(function ()
+    { $("[data-toggle='popover']").popover({html:true});
+    });
+    $(function(){
+        $(".addFriendsSubmit").click(function(){
+
+            console.log($(this).parents(".Fgroup").find("a").html())
+            console.log($(this).parents(".input-group").find("input").val())
+            var groupname =$(this).parents(".Fgroup").find("a").html();
+            var friendname= $(this).parents(".input-group").find("input").val();
+            var data = {"gname":groupname,"fname":friendname};
+            $.ajax({
+                url:'/space',
+                type:'post',
+                data: data,
+                success: function(data,status){
+                    if(status == 'success'){
+                        console.log(1+data+status)
+//                        location.href = 'home';
+
+                        //在第一组添加好友名字
+                        $("#group-1").find(".list-group").append("<li class='list-group-item'>"+data+'</li>')
+                        $(".message").html( '<div class="alert alert-warning" style="margin-bottom:0px">' + '好友添加成功' + '</div>')
+                    }
+                },
+                error: function(data,status){
+                    if(status == 'error'){
+                        console.log(2+data+status)
+//                        location.href = 'space';
+//                        if(status == 404){
+                           $(".message").html( '<div class="alert alert-warning" style="margin-bottom:0px">' + '好友用户名不存在' + '</div>')
+
+//                        }
+                    }
+                }
+            });
+        });
+    });
+    var frisArr = JSON.parse('<%-persInfo%>')
+    console.log(frisArr)
+    var vm=avalon.define({
+        $id:"friends",
+        arr:frisArr
+    })
+</script>
+
+</body>
+</html>

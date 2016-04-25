@@ -4,29 +4,36 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="stylesheets/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <!--<script src="../public/javascripts/lib/jquery-1.11.2.js"></script>-->
     <!--<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>-->
     <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/lib/avalon.js"></script>
 </head>
 <body>
+
 <script>
+//    var app = require('avalon/avalon.js');
+
     var roomList = '<%- roomList %>';
     console.log(JSON.parse(roomList))
     var roomArr = JSON.parse(roomList);
-
+var vm=avalon.define({
+    $id:"box",
+    arr:roomArr
+})
 </script>
 <% include nav.html %>
 
 
-<div class="container">
+<div class="container" ms-controller="box">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" ms-repeat="arr">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        <%-roomList%>
+                        {{el.roomName}}
                     </h3>
                 </div>
                 <div class="panel-body">
@@ -35,44 +42,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        带有 title 的面板标题
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    面板内容
-                </div>
-            </div>
-        </div>
 
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        带有 title 的面板标题
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    面板内容
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        带有 title 的面板标题
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    面板内容
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 

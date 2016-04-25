@@ -14,8 +14,8 @@
 </head>
 <body screen_capture_injected="true">
 <div class="container">
-
-    <form class="col-sm-offset-4 col-sm-4 form-horizontal" role="form" method="post"  action="/login">
+<%- message %>
+    <form class="col-sm-offset-4 col-sm-4 form-horizontal" role="form" method="post"  onsubmit="return false">
         <fieldset>
             <legend></legend>
             <div class="panel panel-default">
@@ -58,32 +58,35 @@
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-//    $(function(){
-//        $("#register0").click(function(){
-//            location.href = 'register';
-//        });
-//        $("#login0").click(function(){
-//            var username = $("#username").val();
-//            var password = $("#password").val();
-//            var data = {"uname":username,"upwd":password};
-//            $.ajax({
-//                url:'/login',
-//                type:'post',
-//                data: data,
-//                success: function(data,status){
-//                    if(status == 'success'){
+    $(function(){
+        $("#register0").click(function(){
+            location.href = 'register';
+        });
+        $("#login0").click(function(){
+            var username = $("#username").val();
+            var password = $("#password").val();
+            var data = {"uname":username,"upwd":password};
+            $.ajax({
+                url:'/login',
+                type:'post',
+                data: data,
+                success: function(data,status){
+                    if(status == 'success'){
+//                        console.log(1+data+status)
 //                        location.href = 'home';
-//                    }
-//                },
-//                error: function(data,status){
-//                    if(status == 'error'){
-//                        location.href = 'login';
-//                    }
-//                }
-//            });
-//        });
-//    });
+                        location.href = '/';
+                    }
+                },
+                error: function(data,status){
+                    if(status == 'error'){
+//                        console.log(2+data+status)
+                        location.href = 'login';
+                    }
+                }
+            });
+        });
+    });
 </script>
 </body>
-</head>
+
 </html>
